@@ -1,6 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-print_error() { printf "%s\n" "$*" >&2; }
+if [ ! -d node_modules ]; then
+    npm install
+fi
 
-printf "Build some stuff!"
+npm run build
