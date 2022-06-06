@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Template
+metadata:
+  name: hac-build-service
+objects:
+  - apiVersion: cloud.redhat.com/v1alpha1
+    kind: Frontend
+    metadata:
+      name: hac-build-service
+    spec:
+      API:
+        versions:
+          - v1
+      assetsPrefix: api/plugins
+      deploymentRepo: 'http://github.com/openshift/hac-build-service'
+      envName: ${ENV_NAME}
+      frontend:
+        paths:
+          - /api/plugins/hac-build-service
+      image: ${IMAGE}:${IMAGE_TAG}
+      title: hac-build-service
+parameters:
+  - name: IMAGE_TAG
+    value: latest
+  - name: IMAGE
+    value: quay.io/cloudservices/hac-build-service-frontend
+  - name: ENV_NAME
+    value: ephem-hac
